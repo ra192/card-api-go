@@ -26,22 +26,22 @@ func createTransaction(srcAccount model.Account, destAccount model.Account, amou
 		return model.Transaction{}, errors.New("source account currency doesn't match destination account currency")
 	}
 
-	transaction := model.Transaction{
+	Transaction := model.Transaction{
 		OrderId: orderId,
 		Type:    transactionType,
 		Status:  model.TransactionStatusCompleted,
 	}
 
-	model.DB.Create(transaction)
+	model.DB.Create(&Transaction)
 
-	model.DB.Create(model.TransactionItem{
+	model.DB.Create(&model.TransactionItem{
 		Amount:               amount,
 		Created:              time.Now(),
-		TransactionID:        transaction.ID,
+		TransactionID:        Transaction.ID,
 		SourceAccountID:      srcAccount.ID,
 		DestinationAccountID: destAccount.ID,
 		CardID:               card.ID,
 	})
 
-	return transaction, nil
+	return Transaction, nil
 }

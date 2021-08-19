@@ -6,7 +6,7 @@ const CashAccountId = 1
 
 func GetActiveAccountById(id uint) (model.Account, error) {
 	Account := model.Account{}
-	result := model.DB.First(&Account, id, "active=true")
+	result := model.DB.First(&Account, "id=?", id, "active=true")
 	return Account, result.Error
 }
 
