@@ -17,11 +17,11 @@ func Fund(accountId uint, amount uint, orderId string) (model.Transaction, error
 		return model.Transaction{}, err
 	}
 
-	return createTransaction(cashAccount, account, amount, model.TransactionTypeFund, orderId, model.Card{})
+	return createTransaction(cashAccount, account, amount, model.TransactionTypeFund, orderId, nil)
 }
 
 func createTransaction(srcAccount model.Account, destAccount model.Account, amount uint, transactionType string,
-	orderId string, card model.Card) (model.Transaction, error) {
+	orderId string, cardId *uint) (model.Transaction, error) {
 	if srcAccount.Currency != destAccount.Currency {
 		return model.Transaction{}, errors.New("source account currency doesn't match destination account currency")
 	}
@@ -40,7 +40,7 @@ func createTransaction(srcAccount model.Account, destAccount model.Account, amou
 		TransactionID:        Transaction.ID,
 		SourceAccountID:      srcAccount.ID,
 		DestinationAccountID: destAccount.ID,
-		CardID:               card.ID,
+		CardID:               cardId,
 	})
 
 	return Transaction, nil

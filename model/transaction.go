@@ -27,7 +27,7 @@ type TransactionItem struct {
 	SourceAccount        Account
 	DestinationAccountID uint
 	DestinationAccount   Account
-	CardID               uint
+	CardID               *uint
 	Card                 Card
 }
 
