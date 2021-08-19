@@ -12,7 +12,7 @@ import (
 var hmacSecret = []byte("UCnmDHn9QS+GqLR5Gkyfw00fykPgW8R9b9uALi4xHEA=")
 
 func CreateToken(merchantId uint, secret string) (string, error) {
-	Merchant, err := GetActiveMerchantById(merchantId)
+	Merchant, err := GetMerchantById(merchantId)
 	if err != nil {
 		return "", err
 	}
@@ -21,7 +21,7 @@ func CreateToken(merchantId uint, secret string) (string, error) {
 		return "", errors.New("secret is not valid")
 	}
 
-	claims := &jwt.StandardClaims{Subject: strconv.FormatUint(uint64(merchantId),10)}
+	claims := &jwt.StandardClaims{Subject: strconv.FormatUint(uint64(merchantId), 10)}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	return token.SignedString(hmacSecret)

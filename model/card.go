@@ -7,11 +7,11 @@ const (
 )
 
 type Card struct {
-	ID uint `json:"id"`
-	Type string `json:"type"`
-	Created time.Time `json:"created"`
+	ID         uint
+	Type       string
+	Created    time.Time
 	CustomerID uint
-	Customer Customer
-	AccountID uint
-	Account Account
+	Customer   Customer
+	AccountID  uint
+	Account    Account
 }
