@@ -26,7 +26,7 @@ type CreateCustomerDto struct {
 
 func CreateCustomer(c *gin.Context) {
 	merchantId, err := validateToken(c)
-	if err!=nil {
+	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -45,6 +45,10 @@ func CreateCustomer(c *gin.Context) {
 		LastName: req.LastName, BirthDate: datatypes.Date(birthDate), Address: req.Address, Address2: req.Address2,
 		City: req.City, StateRegion: req.StateRegion, Country: req.Country, PostalCode: req.PostalCode,
 		MerchantID: merchantId}
-	service.CreateCustomer(&customer)
+	err = service.CreateCustomer(&customer)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 	c.JSON(http.StatusOK, gin.H{"id": customer.ID})
 }

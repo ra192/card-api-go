@@ -33,7 +33,7 @@ type TransactionItem struct {
 
 type TransactionFee struct {
 	ID        uint
-	rate      float32
+	Rate      float32
 	Type      string
 	AccountID uint
 	Account   Account

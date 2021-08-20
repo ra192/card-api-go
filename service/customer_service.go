@@ -5,7 +5,11 @@ import (
 	"log"
 )
 
-func CreateCustomer(customer *model.Customer)  {
-	model.DB.Create(customer)
-	log.Printf("Customer was created with id: %d",customer.ID)
+func CreateCustomer(customer *model.Customer) error {
+	result := model.DB.Create(customer)
+	if result.Error != nil {
+		return result.Error
+	}
+	log.Printf("Customer was created with id: %d", customer.ID)
+	return nil
 }
