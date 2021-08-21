@@ -5,7 +5,7 @@ import (
 	"gorm.io/gorm"
 )
 
-var dsn = "host=localhost user=card-api password=card-api dbname=card-api-go"
+var dsn = "host=localhost user=card_api password=card_api dbname=card_api_go"
 var DB *gorm.DB
 
 func ConnectDataBase() {
